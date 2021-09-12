@@ -223,5 +223,5 @@ function fetchResults() {
 results.style.display = "none"
 loading.style.display = "none"
 button.addEventListener("click", loaderAnimation => loading.style.display = "block");
-button.addEventListener("click", ()=>setTimeout(() => {fetchResults()}, 2000));
+button.addEventListener("click", ()=>setTimeout(() => {fetchResults()}, 1000));
 date.addEventListener("click", clearResult)
