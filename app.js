@@ -1,6 +1,7 @@
 var date = document.querySelector("#date")
 var button = document.querySelector("#check-btn")
 var results = document.querySelector("#results")
+var loading = document.querySelector(".loader")
 
 function clearResult() {
     results.innerText = "";
@@ -8,7 +9,7 @@ function clearResult() {
 
 
 function reformatDate(date) {
-    return reformatted = date.slice(0, 2) + "-" + date.slice(2, 4) + "-" + date.slice(4)
+    return (date.slice(0, 2) + "-" + date.slice(2, 4) + "-" + date.slice(4))
 }
 
 
@@ -192,7 +193,8 @@ function getPrevDate(currentSplitDateString) {
 
 
 function fetchResults() {
-    var dateDict = generateDateFormats(date.value);
+    loading.style.display = "none"
+    var dateDict =generateDateFormats(date.value)
     var dates = Object.values(dateDict);
     var palindromeFlag = false;
     for (var i = 0; i < dates.length; i++) {
@@ -213,9 +215,13 @@ function fetchResults() {
             results.innerText = "Your entered birthday date is not a Palindrome.\n \
             The nearest date as palindrome was before " + prevResult.noOfDays + (prevResult.noOfDays === 1 ? " day" : " days") + " on " + reformatDate(prevResult.date) + " in " + prevResult.format + " format";
         }
+        loading.style.display = "none"
+        results.style.display = "block"
     }
 }
 
-
-button.addEventListener("click", fetchResults)
+results.style.display = "none"
+loading.style.display = "none"
+button.addEventListener("click", loaderAnimation => loading.style.display = "block");
+button.addEventListener("click", ()=>setTimeout(() => {fetchResults()}, 2000));
 date.addEventListener("click", clearResult)
