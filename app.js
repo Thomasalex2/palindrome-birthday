@@ -3,20 +3,16 @@ var button = document.querySelector("#check-btn")
 var results = document.querySelector("#results")
 var loading = document.querySelector(".loader")
 
-function clearResult() {
-    results.innerText = "";
-}
 
+let clearResult = () => results.innerText = "";
 
-function reformatDate(date) {
-    return (date.slice(0, 2) + "-" + date.slice(2, 4) + "-" + date.slice(4))
-}
+let reformatDate = date => date.slice(0, 2) + "-" + date.slice(2, 4) + "-" + date.slice(4)
 
+let getKeybyValue = (dateDict, date) => Object.keys(dateDict).find(key => dateDict[key] === date)
 
-function getKeybyValue(dateDict, date) {
-    return Object.keys(dateDict).find(key => dateDict[key] === date)
-}
+let checkLeapYear = year => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0 ? true : false;
 
+let checkPalindrome = date => reversedDate = date.split("").reverse().join("") === date ? true : false;
 
 function generateDateFormats(givenDate) {
     var splitDate = {
@@ -35,17 +31,6 @@ function generateDateFormats(givenDate) {
     }
     return dateDict;
 }
-
-
-function checkPalindrome(date) {
-    reversedDate = date.split("").reverse().join("")
-    if (reversedDate === date) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 
 function getNextPalindrome(currentDate, direction) {
     var currentSplitDate = {
@@ -77,13 +62,6 @@ function getNextPalindrome(currentDate, direction) {
     // return(getPrevDate(currentSplitDate));
 }
 
-function checkLeapYear(year) {
-    if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 function getNextDate(currentSplitDateString) {
     var currentSplitDate = {}
